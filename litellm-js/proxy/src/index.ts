@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import { Context } from 'hono';
 import { bearerAuth } from 'hono/bearer-auth'
 import OpenAI from "openai";
+import { serve } from '@hono/node-server'
 
 const openai = new OpenAI({
   apiKey: "sk-1234",
@@ -56,8 +57,12 @@ app.post('/chat/completions', chatCompletionHandler);
 app.post('/openai/deployments/:model*/chat/completions', chatCompletionHandler);
 
 const port = process.env.PORT ? Number(process.env.PORT) : 4000;
-app.listen({ port }, () => {
-  console.log(`Server running on port ${port}`);
+serve({
+  fetch: app.fetch,
+  port: port,
+  hostname: '0.0.0.0'
+}, () => {
+  console.log(`Server running on http://0.0.0.0:${port}`);
 });
 
 
