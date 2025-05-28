@@ -1,4 +1,11 @@
 {
+  "name": "litellm-proxy-js",
+  "version": "1.0.0",
+  "main": "litellm-js/proxy/src/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node litellm-js/proxy/src/index.js"
+  },
   "dependencies": {
     "@hono/node-server": "^1.14.3",
     "@types/node": "^22.15.23",
